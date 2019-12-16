@@ -1,0 +1,21 @@
+Starting audit...
+[ERROR] /home/luigi/eclipse-workspace/tema2/src/filesystem/TouchOperation.java:32:50: File contains tab characters (this is the first instance). [FileTabCharacter]
+[ERROR] /home/luigi/eclipse-workspace/tema2/src/filesystem/WriteToFileOperation.java:41:50: File contains tab characters (this is the first instance). [FileTabCharacter]
+[ERROR] /home/luigi/eclipse-workspace/tema2/src/filesystem/FileSystemSnapshot.java:156:5: File contains tab characters (this is the first instance). [FileTabCharacter]
+[ERROR] /home/luigi/eclipse-workspace/tema2/src/filesystem/MkdirOperation.java:34:50: File contains tab characters (this is the first instance). [FileTabCharacter]
+[ERROR] /home/luigi/eclipse-workspace/tema2/src/Main.java:8:5: File contains tab characters (this is the first instance). [FileTabCharacter]
+[ERROR] /home/luigi/eclipse-workspace/tema2/src/utils/OperationParser.java:30:5: File contains tab characters (this is the first instance). [FileTabCharacter]
+[ERROR] /home/luigi/eclipse-workspace/tema2/src/utils/OperationFactory.java:69:13: File contains tab characters (this is the first instance). [FileTabCharacter]
+[ERROR] /home/luigi/eclipse-workspace/tema2/src/vcs/LogOperation.java:10:1: File contains tab characters (this is the first instance). [FileTabCharacter]
+[ERROR] /home/luigi/eclipse-workspace/tema2/src/vcs/VcsOperation.java:9:1: File contains tab characters (this is the first instance). [FileTabCharacter]
+[ERROR] /home/luigi/eclipse-workspace/tema2/src/vcs/BranchOperation.java:15:1: File contains tab characters (this is the first instance). [FileTabCharacter]
+[ERROR] /home/luigi/eclipse-workspace/tema2/src/vcs/RollbackOperation.java:9:1: File contains tab characters (this is the first instance). [FileTabCharacter]
+[ERROR] /home/luigi/eclipse-workspace/tema2/src/vcs/InvalidVcsOperation.java:9:1: File contains tab characters (this is the first instance). [FileTabCharacter]
+[ERROR] /home/luigi/eclipse-workspace/tema2/src/vcs/StatusOperation.java:9:1: File contains tab characters (this is the first instance). [FileTabCharacter]
+[ERROR] /home/luigi/eclipse-workspace/tema2/src/vcs/CommitOperation.java:9:1: File contains tab characters (this is the first instance). [FileTabCharacter]
+[ERROR] /home/luigi/eclipse-workspace/tema2/src/vcs/Commit.java:6:1: File contains tab characters (this is the first instance). [FileTabCharacter]
+[ERROR] /home/luigi/eclipse-workspace/tema2/src/vcs/CheckoutOperation.java:9:1: File contains tab characters (this is the first instance). [FileTabCharacter]
+[ERROR] /home/luigi/eclipse-workspace/tema2/src/vcs/Vcs.java:13:1: File contains tab characters (this is the first instance). [FileTabCharacter]
+[ERROR] /home/luigi/eclipse-workspace/tema2/src/vcs/Branch.java:8:1: File contains tab characters (this is the first instance). [FileTabCharacter]
+Audit done.
+Checkstyle ends with 18 errors.

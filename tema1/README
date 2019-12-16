@@ -1,0 +1,119 @@
+
+Clasa Main:
+    Rutina main() va parsa citirea printr-un obiect de tipul GameInput și va porni jocul printr-un 
+obiect de tipul Game.
+
+
+Clasa Game:
+    playGame():
+        Aici este implementat algoritmul principal al jocului: sunt create instanțele pentru 
+    jucători, iar la fiecare rundă ei vor își vor completa cărțile din mână, comercianții își
+    vor crea sacii și vor declara bunuri, iar șeriful îi va verifica (sau nu).
+        Având în vedere că jocul se va încheia după ce fiecare dintre jucători a fost șerif de 
+    exact două ori, înseamnă că numărul de runde va fi egal cu dublul numărului de jucători.
+    
+    ranking():
+        După ce algoritmul din playGame() s-a încheiat, aici vor fi puse pe tarabe bunurile bonus 
+    provenite de la bunurile ilegale, vor fi acordate bonusurile King și Queen și va fi întocmit 
+    clasamentul final, ce va fi apoi afișat la consolă.
+
+
+Clasa BasicPlayer:
+    Acesta este tipul de bază al unui jucător. Orice jucător este un BasicPlayer, iar cei cu 
+strategia greedy, bribed sau wizard au câte o clasă specifică ce extinde această clasă și au
+suprascrise metodele playMerchant() și playSheriff(), în care sunt implementați algoritmii 
+corespunzători strategiei fiecăruia. Cum fiecare din aceste strategii are la bază strategia 
+basic, cu anumite modificări sau adăugiri, aceste metode suprascrise vor apela și metodele 
+din clasa de bază. Strategia greedy folosește paritatea rundei curente, deci clasa GreedyPlayer 
+are implementate metode get/set pentru variabila rundă.
+    Restul metodelor sunt de tipul getter/setter, deoarece toate câmpurile sunt private, sau 
+auxiliare pentru implementarea strategiei de joc.
+
+    Câmpuri:
+        assetsInHand = frecvența bunurilor din mână.
+	    assetsOnMerchantStand = frecvent bunurilor de pe tarabă.
+	    assetsInBag = frecvența bunurilor din sac.
+	    assetsInOrder = bunurile din mână, cu ordinea păstrată.
+    	declaredType = tipul de bun declarat după aplicarea strategiei.
+    	nrAssetsInHand = numărul de carți rămase în mână.
+    	coins = banii deținuți de jucător.
+    	bribe = mita pe care o oferă jucătoru la runda curentă.
+
+    Metode:
+        inspectBag(): inspectează bunurile alese de un jucător, le confiscă pe cele ilegale sau 
+                       nedeclarate și stabiliște penalizarea primită pentru acestea, apoi apelează
+                       metoda verifyBag(false).
+
+        verifyBag(boolean bribed): doar verifică bunurile alese și stabilește penalizarea pentru 
+                        șerif, dar asta numai atunci când bribed este false, adică șeriful nu este 
+                        mituit (sau nu acceptă mita); în rest, acceptă bunurile alese, adică le 
+                        permite trecerea.
+
+        finalProfit(): calculează profitul final, din banii rămași + profitul obținut din bunurile
+                        cu care a reușit să treacă de control.
+
+        breadFirst(): în cazul în care frecvența pâinilor și a găinilor este aceeși, returnează
+                        true dacă prima carte din mână este o pâine și false dacă este găină.
+                        Această metodă a fost necesară fiindcă am lucrat preponderent cu vectori de
+                        apariții pentru simplitate și eficiență, dar aceștia nu păstrază și ordinea
+                        cărților din mână, așa că am reținut separat și cărțile în ordine.
+        acceptAsset(): permite trecearea bunurilor, deci le adaugă pe tarabă.
+
+        confiscateAsset(): nu permite trecerea bunurilor, deci le confiscă. Chiar dacă în enunțul
+                            temei este specificat că în acest caz ar trebui adăugate bunurile 
+                            confiscate la sfârșitul pachetului, implementarea acesteia este 
+                            inutilă, deoarece trei jucători, în șase runde, nu vor putea consuma 
+                            nici măcar 3 * 6 * 6 = 108 de cărți, iar în pachet sunt 216.
+
+        chooseAsset(): pune în sac bunurile alese în urma aplicării strategiei.
+
+        bestLegalAsset(): returnează cel mai frecvent bun legal din mână.
+
+        bestIllegalAsset(): returnează cel mai valoros bun ilegal din mână.
+
+        hasOnlyIllegals(): returnează true dacă jucătorul are numai cărți ilegale în mână
+                            și false, altfel.
+
+
+Clasa Utilities:
+    Aici sunt implementate diverse utilitare: un vector ce conține informații despre bunuri, doi 
+vectori ce conțin valorile bonusurilor King și Queen, plus câteva constante.
+
+
+Clasa AssetInfo:
+    Aceasta este o clasă auxiliară, folosită numai pentru crearea vectorului ID_TO_CARD[] din 
+clasa Utilities, care mapează ID-urile bunurilor la informații despre ele. Pentru simplitate, 
+am modificat ID-urile bunurilor ilegale din [10, 11, 12] în [4, 5, 6], pentru a avea o continuitate
+în indicii vectorului. De asemenea am introdus constante pentru unii indici ai bunurilor, deoarece
+între 0 și 3 sunt bunuri legale, iar între 4 și 6 sunt ilegale.
+
+
+Clasele PlayersComparator & Pair:
+    În metoda ranking() din clasa Game este necesară o mapare a ID-urilor jucătorilor la numărul 
+de bunuri legale de un anumit tip pentru acordarea bonusurilor King și Queen, apoi la scorul final,
+pentru stabilirea clasamentului. Deci, este necesară o structură de date de tip pereche, pe care 
+am implementat-o folosing clasa generică Pair, și o metodă de comparare a două obiecte de tip Pair,
+pentru sortarea unui vector de perechi, implementată în clasa PlayersComparator, care moștenește 
+interfața Comparator.
+
+
+Bonus (clasa WizardPlayer):
+    Pentru implementarea strategiei bonus m-am folosit de statistică. Strategia de comerciant 
+basic, adică onest întotdeauna și care minimizează numărul de bunuri ilegale (ar alege doar atunci 
+când are numai bunuri ilegale în mână, deci când nu are încotro) și nu oferă mită, pare să câștige 
+mai des decât celelalte, așa că am creat o strategie care întâi o aplică pe aceasta, apoi oferă 
+mită 5 dacă are un bun ilegal, pentru a putea trece neverificat în cazul în care dă de un șerif 
+greedy, deci este o îmbunătățire adusă strategiei de bază.
+    Când este șerif, caută să primească cât mai mulți bani de la comercianți și să-i despăgubească
+cât mai puțin, așa că va accepta mită când i se oferă (deci nu-i va controla în acest caz), dar îi
+controlează pe cei care i se par suspecți. Dacă nu i se oferă mită, întâi va verifica câte bunuri 
+se află în sac și ce tip de bun a fost declarat. Bazat pe statistică, cel mai probabil, dacă bunul
+declarat este măr (adică ID-ul 0), acel comerciant va avea cel puțin un bun ilegal, deci va fi 
+prins, fiindcă ceilalți declară că au mere în sac atunci când aleg bunuri ilegale. Dacă numărul de 
+bunuri depășește 2, este foarte probabil să aibă 2-3 bunuri legale și unul ilegal când este basic 
+sau greeedy, sau multe bunuri ilegale, când este bribed. Tot așa, dacă vanzătorul are fix un bun în
+sac, este foarte mare probabilitatea ca acel bun să fie unul ilegal, deoarece basic și greedy vor 
+alege un singur astfel de bun când au numai ilegale. Având în vedere că orice jucător comerciant va
+pune în sac între unul și cinci bunuri, înseamnă că doar atunci când a ales exact două nu va fi 
+controlat de șeriful wizard, fiindcă cel mai probabil vor fi bunuri legale și, astfel, șeriful va 
+pierde bani.

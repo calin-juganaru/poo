@@ -1,0 +1,20 @@
+Starting audit...
+[ERROR] /home/luigi/eclipse-workspace/tema1/src/main/Main.java:22:9: File contains tab characters (this is the first instance). [FileTabCharacter]
+[ERROR] /home/luigi/eclipse-workspace/tema1/src/main/Main.java:32:63: '3' is a magic number. [MagicNumber]
+[ERROR] /home/luigi/eclipse-workspace/tema1/src/main/Main.java:34:89: '6' is a magic number. [MagicNumber]
+[ERROR] /home/luigi/eclipse-workspace/tema1/src/tema/Pair.java:4:1: File contains tab characters (this is the first instance). [FileTabCharacter]
+[ERROR] /home/luigi/eclipse-workspace/tema1/src/tema/BasicPlayer.java:7:1: File contains tab characters (this is the first instance). [FileTabCharacter]
+[ERROR] /home/luigi/eclipse-workspace/tema1/src/tema/BasicPlayer.java:31:57: Parameter count should be final. [FinalParameters]
+[ERROR] /home/luigi/eclipse-workspace/tema1/src/tema/BasicPlayer.java:178:61: Parameter count should be final. [FinalParameters]
+[ERROR] /home/luigi/eclipse-workspace/tema1/src/tema/BasicPlayer.java:247:9: Class 'BasicPlayer' looks like designed for extension (can be subclassed), but the method 'playMerchant' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'BasicPlayer' final or making the method 'playMerchant' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ERROR] /home/luigi/eclipse-workspace/tema1/src/tema/BasicPlayer.java:267:9: Class 'BasicPlayer' looks like designed for extension (can be subclassed), but the method 'playBasicSheriff' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'BasicPlayer' final or making the method 'playBasicSheriff' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ERROR] /home/luigi/eclipse-workspace/tema1/src/tema/BasicPlayer.java:274:9: Class 'BasicPlayer' looks like designed for extension (can be subclassed), but the method 'playSheriff' does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class 'BasicPlayer' final or making the method 'playSheriff' static/final/abstract/empty, or adding allowed annotation for the method. [DesignForExtension]
+[ERROR] /home/luigi/eclipse-workspace/tema1/src/tema/Game.java:8:1: File contains tab characters (this is the first instance). [FileTabCharacter]
+[ERROR] /home/luigi/eclipse-workspace/tema1/src/tema/GreedyPlayer.java:4:1: File contains tab characters (this is the first instance). [FileTabCharacter]
+[ERROR] /home/luigi/eclipse-workspace/tema1/src/tema/WizardPlayer.java:4:1: File contains tab characters (this is the first instance). [FileTabCharacter]
+[ERROR] /home/luigi/eclipse-workspace/tema1/src/tema/AssetInfo.java:4:1: File contains tab characters (this is the first instance). [FileTabCharacter]
+[ERROR] /home/luigi/eclipse-workspace/tema1/src/tema/Utilities.java:4:1: File contains tab characters (this is the first instance). [FileTabCharacter]
+[ERROR] /home/luigi/eclipse-workspace/tema1/src/tema/PlayersComparator.java:6:1: File contains tab characters (this is the first instance). [FileTabCharacter]
+[ERROR] /home/luigi/eclipse-workspace/tema1/src/tema/BribedPlayer.java:5:1: File contains tab characters (this is the first instance). [FileTabCharacter]
+Audit done.
+Checkstyle ends with 17 errors.

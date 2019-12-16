@@ -1,0 +1,35 @@
+Pentru a implementa comenzile de vcs, am adăugat în cadrul claselor deja existente în schelet:
+    - OperationType: coduri pentru noile comenzi
+    - OperationParser: cazurile în cadrul switch() din parseVcsOperationI()
+    - OperationFactory: noi cazuri pentru switch() în createOperation()
+    - FileSystemSnapshot:
+        - stagedChanges: o listă de string-uri în care să rețin mesajele generate în urma 
+                            aplicării anumitor operații (utilă pentru operația vcs status)
+        - getChanges() & addChange(): getter și setter pentru lista stagedChanges
+    - TouchOperation & MkdirOperation: execute(): înainte de ieșirea din funcție, adaug un mesaj
+                                                 în lista stagedChanges a snapshot-ului curent
+
+Pe lângă cele adăugate la schelet, am avut nevoie și de noi clase:
+    - Commit: un obiect de tipul Commit are un ID, un mesaj și un snapshot al sistemului de fișiere
+    - Branch: un branch are un nume și o listă de Commit-uri
+    - BranchOperation: implementează operația vcs branch
+        ->  execute(): creează un nou branch, cu numele dat ca parametru, dacă acesta nu a mai fost
+                        folosit, altfel, returnează codul de eroare VCS_BAD_CMD_CODE
+    - StatusOperation: implementează operația vcs status
+        ->  execute(): afișează numele branch-ului curent și modificările din stagedChanges
+    - CommitOperation: implementa operația vcs commit
+        ->  execute(): dacă parametrii sunt valizi și există operații în staging, va crea
+                        un nou commit, altfel va returna codul VCS_BAD_CMD_CODE
+    - LogOperation: implementează operația vcs log
+        ->  execute(): afișează toate commit-urile de pe branch-ul curent
+    - CheckoutOperation: implementa operația vcs checkout
+        ->  execute(): mută pointerul HEAD pe branch-ul sau commit-ul dat ca parametru, dacă
+                        acesta există, iar staging-ul nu este gol, altfel întoarce un cod de
+                        eroare (VCS_STAGED_OP_CODE, VCS_BAD_PATH_CODE sau VCS_BAD_CMD_CODE)
+    - RollbackOperation(): implementează operația vcs rollback
+        ->  execute(): apelează metoda rollback() din clasa Vcs, care aduce snapshot-ul sistemului
+                        de fișiere la versiunea dată de ultimul commit, golind și staging-ul
+
+    În clasa Vcs am mai adăugat un obiect de tipul Commit head (pointerul HEAD), o listă de
+branch-uri (branches), un branch (currentBranch) pentru branch-ul activ și un întreg lastCommitID,
+pentru a reține ultimul ID folosit la crearea unui nou commit.
